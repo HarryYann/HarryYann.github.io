@@ -1,20 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Timer | Responsive Multipurpose Bootstrap Hugo Template</title>
+    <title>LeaveIt on LeaveIt</title>
     <link>https://yanghairui.life/</link>
-    <description>Recent content on Timer | Responsive Multipurpose Bootstrap Hugo Template</description>
+    <description>Recent content in LeaveIt on LeaveIt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 12 Mar 2021 23:55:43 +0800</lastBuildDate><atom:link href="https://yanghairui.life/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 12 Mar 2021 23:55:43 +0800</lastBuildDate>
+    <atom:link href="/" rel="self" type="application/rss+xml" />
+    
     <item>
-      <title>First</title>
-      <link>https://yanghairui.life/post/first/</link>
+      <title>Posts</title>
+      <link>https://yanghairui.life/post/</link>
       <pubDate>Fri, 12 Mar 2021 23:55:43 +0800</pubDate>
       
-      <guid>https://yanghairui.life/post/first/</guid>
-      <description>?????
-测试</description>
+      <guid>https://yanghairui.life/post/</guid>
+      <description></description>
     </item>
     
     <item>
