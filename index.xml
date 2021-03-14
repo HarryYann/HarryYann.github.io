@@ -1,28 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>LeaveIt on LeaveIt</title>
-    <link>https://yanghairui.life/</link>
-    <description>Recent content in LeaveIt on LeaveIt</description>
+    <title>Website of Jane Doe</title>
+    <link>https://example.com/</link>
+    <description>Recent content on Website of Jane Doe</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Fri, 12 Mar 2021 23:55:43 +0800</lastBuildDate>
-    <atom:link href="/" rel="self" type="application/rss+xml" />
-    
+    <language>en</language>
+    <lastBuildDate>Fri, 12 Mar 2021 23:55:43 +0800</lastBuildDate><atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Posts</title>
-      <link>https://yanghairui.life/post/</link>
+      <title>First</title>
+      <link>https://example.com/post/first/</link>
       <pubDate>Fri, 12 Mar 2021 23:55:43 +0800</pubDate>
       
-      <guid>https://yanghairui.life/post/</guid>
-      <description></description>
+      <guid>https://example.com/post/first/</guid>
+      <description>?????
+测试</description>
     </item>
     
     <item>
       <title>About</title>
-      <link>https://yanghairui.life/about/</link>
+      <link>https://example.com/about/</link>
       <pubDate>Fri, 12 Mar 2021 23:55:16 +0800</pubDate>
       
-      <guid>https://yanghairui.life/about/</guid>
+      <guid>https://example.com/about/</guid>
       <description></description>
     </item>
     
