@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-cn" data-theme=""><head>
-    <title> Harry Yang | swagger-gin自动生成API文档 </title>
+    <title> Harry Yang | 学习编写Makefile </title>
 
     
     <meta charset="utf-8"><meta name="generator" content="Hugo 0.80.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-    <meta name="description" content="使用swagger-gin对gin框架生成的后端服务自动生成API文档">
+    <meta name="description" content="Harry-Yang&#39;s blog">
     
     <link rel="stylesheet"
           href="https://yanghairui.life/css/style.min.940d8041f6b5045573e3f716314b7803dbdaf305ef254330bec40e8a4bfba709.css"
@@ -29,7 +29,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="https://yanghairui.life/favicons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="https://yanghairui.life/favicons/favicon-16x16.png">
 
-    <link rel="canonical" href="https://yanghairui.life/post/swagger-gin%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90api%E6%96%87%E6%A1%A3/">
+    <link rel="canonical" href="https://yanghairui.life/post/%E5%AD%A6%E4%B9%A0%E7%BC%96%E5%86%99makefile/">
 
     
     
@@ -43,8 +43,11 @@
 
     
     <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="swagger-gin自动生成API文档"/>
-<meta name="twitter:description" content="使用swagger-gin对gin框架生成的后端服务自动生成API文档"/>
+<meta name="twitter:title" content="学习编写Makefile"/>
+<meta name="twitter:description" content="make工具介绍 项目构建往往要经过一系列的过程，尤其是C项目，可能需要先编译这个，再编译那个，再添加个链接，完了再打个docker镜像，会有很多的文件需要创建和更改。这些动作，我们既可以通过手工的方式，一步步完成，不免显得繁琐。或者也可以写个shell脚本自动完成。但是make是专门做这件事的。
+make的环境准备 对于linux或者mac系统，只要有gcc，一般都会有make，通过命令make -v可以检查你当前的环境有没有make，而在windows上想使用make还是比较复杂的，尽管网上有很多教程，但我都没有尝试成功，推荐还是尽量在linux或者mac环境下使用make构建你的项目
+make的使用 make的使用非常简单，笔者不是make大神，使用make都是通过一条 make 命令和编写一个Makefile文件即可。
+Makefile的编写 Makefile中需要指明要进行哪些操作，这些操作需要有哪些前置操作，或者需要哪些前置文件，最终又生成了什么文件。"/>
 
 
     
@@ -142,11 +145,11 @@
         <div class="post-content">
             
             <div class="post-title">
-                <h3>swagger-gin自动生成API文档</h3>
+                <h3>学习编写Makefile</h3>
                 
                     <div class="info">
                         <em class="fas fa-calendar-day"></em>
-                        <span class="date"> Tue, Mar 16, 2021 
+                        <span class="date"> Thu, Mar 25, 2021 
                                            </span>
                         <em class="fas fa-stopwatch"></em>
                         <span class="reading-time">阅读时间 1 分钟</span>
@@ -154,58 +157,49 @@
                 
             </div>
 
-            <h3 id="swagger">swagger</h3>
-<p>swagger是通用的API文档生成工具，那么对于go语言的gin框架，也有专用的swagger工具swagger-gin</p>
-<h3 id="使用">使用</h3>
-<p>swagger-gin的使用非常简单，只需要下载包、添加注释、添加路由、命令行生成swagger文档即可。</p>
-<ul>
-<li>安装依赖包：</li>
-</ul>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ go get github.com/swaggo/gin-swagger
-$ go get github.com/swaggo/swag 
-$ go get github.com/swaggo/files
+            <h3 id="make工具介绍">make工具介绍</h3>
+<p>项目构建往往要经过一系列的过程，尤其是C项目，可能需要先编译这个，再编译那个，再添加个链接，完了再打个docker镜像，会有很多的文件需要创建和更改。这些动作，我们既可以通过手工的方式，一步步完成，不免显得繁琐。或者也可以写个shell脚本自动完成。但是make是专门做这件事的。</p>
+<h4 id="make的环境准备">make的环境准备</h4>
+<p>对于linux或者mac系统，只要有gcc，一般都会有make，通过命令<code>make -v</code>可以检查你当前的环境有没有make，而在windows上想使用make还是比较复杂的，尽管网上有很多教程，但我都没有尝试成功，推荐还是尽量在linux或者mac环境下使用make构建你的项目</p>
+<h4 id="make的使用">make的使用</h4>
+<p>make的使用非常简单，笔者不是make大神，使用make都是通过一条 <code>make</code> 命令和编写一个Makefile文件即可。</p>
+<h3 id="makefile的编写">Makefile的编写</h3>
+<p>Makefile中需要指明要进行哪些操作，这些操作需要有哪些前置操作，或者需要哪些前置文件，最终又生成了什么文件。</p>
+<p>Makefile的通用格式为：</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">&lt;target&gt; : &lt;prerequisites&gt;
+<span class="o">[</span>tab<span class="o">]</span>  &lt;commands&gt;
 </code></pre></div><ul>
-<li>
-<p>在你的代码中添加注释</p>
-<p>swagger-gin主要就是根据这些注释生成API文档的。</p>
-<p>首先，在你的main函数所在的.go文件中添加这些注释，这些都是一些元信息</p>
-</li>
+<li>target是这个操作要实现的目标，可以只是一个标签，也可以是一个文件名</li>
+<li>prerequisites指的是这个操作的需要的前置条件，这个没有可以不写，前置条件既可以是一个文件名，也可以是一个标签</li>
+<li>tab是一个制表符，注意是制表符，不是空格</li>
+<li>commands就是我们需要执行的shell命令了，一个操作可以有一个或多个命令，多个命令可以用<code>\</code>进行换行</li>
 </ul>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// @title cluster-inspector
-</span><span class="c1">// @version 1.0
-</span><span class="c1">// @description a tool for inspecting clusters
-</span><span class="c1">// @contact.name wb.yanghairui
-</span><span class="c1">// @contact.email wb.yanghairui@mesg.corp.netease.com
-</span><span class="c1">// @license.name Apache 2.0
-</span><span class="c1">// @license.url http://www.apache.org/licenses/LICENSE-2.ml
-</span><span class="c1">// @schemes http
-</span><span class="c1">// @host localhost:9999
-</span><span class="c1">// @BasePath /api/v2/health
-</span></code></pre></div><p>​        然后在你对应的handler函数中，添加对每个接口的注释</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// @Tags Register
-</span><span class="c1">// @Summary Register a cluster&#39;s information into the database
-</span><span class="c1">// @Accept application/json
-</span><span class="c1">// @Produce application/json
-</span><span class="c1">// @Param body body swaginfo.ClusterRegisterRequest true &#34;the information of a cluster&#34;
-</span><span class="c1">// @Success 200 {object} swaginfo.ClusterRegisterSucceedResponse true &#34;information of the clusters which is effected&#34;
-</span><span class="c1">// @Router /cluster [post]
-</span></code></pre></div><ul>
-<li>
-<p>生成API文档</p>
-<p>在main函数所在文件的路径下，使用命令</p>
-</li>
-</ul>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ swag init
-</code></pre></div><p>可以在根路径下看到生成了一个docs目录，里面有三个文件，就是我们的swagger文档了</p>
+<p>举个例子</p>
+<div class="highlight"><pre class="chroma"><code class="language-makefile" data-lang="makefile"><span class="nv">NAME</span> <span class="o">=</span> <span class="nb">test</span>
+<span class="nv">VERSION</span> <span class="o">=</span> <span class="sb">`</span>date +%Y%m%d<span class="sb">`</span>  <span class="c1"># 今天的日期</span>
+<span class="nv">NCR</span> <span class="o">=</span> ncr.nie.com/yanghairui/
+
+<span class="c"># docker-push是target,docker-build是这个操作的前置操作
+</span><span class="c"></span><span class="nf">docker-push</span><span class="o">:</span> <span class="n">docker</span>-<span class="n">build</span>
+   docker push <span class="k">$(</span>NCR<span class="k">)$(</span>NAME<span class="k">)</span>:<span class="k">$(</span>VERSION<span class="k">)</span>
+
+<span class="nf">docker-build</span><span class="o">:</span> <span class="n">go</span>-<span class="n">build</span>
+   docker build . -t <span class="k">$(</span>NCR<span class="k">)$(</span>NAME<span class="k">)</span>:<span class="k">$(</span>VERSION<span class="k">)</span>
+
+<span class="nf">go-build</span><span class="o">:</span>
+   <span class="nv">GO111MODULE</span><span class="o">=</span>on <span class="se">\
+</span><span class="se"></span>   <span class="nv">GOOS</span><span class="o">=</span><span class="s2">&#34;linux&#34;</span> <span class="se">\
+</span><span class="se"></span>   <span class="nv">GOARCH</span><span class="o">=</span><span class="s2">&#34;amd64&#34;</span> <span class="se">\
+</span><span class="se"></span>   go build -o <span class="nb">test</span> 
+</code></pre></div><p>在Makefile所在的目录输入<code>make</code>，然后按回车，会按以下顺序执行操作：</p>
 <ul>
-<li>
-<p>添加路由</p>
-<p>在你的路由中添加一行，即可</p>
-</li>
+<li>上面这个例子执行会先执行go-build标签的内容，编译一个go项目</li>
+<li>然后执行docker-build，打一个docker镜像</li>
+<li>最后将这个docker镜像push到远程仓库、</li>
+<li><code>#</code> 号后是注释</li>
+<li>变量在定义完用<code>$(变量名)</code>引用</li>
+<li>还有一些内置变量，但是并不常用，如：<code>$(CC)</code>指当前使用的编译器，<code>$(MAKE)</code>指当前使用的make工具</li>
 </ul>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">router</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/swagger/*any&#34;</span><span class="p">,</span> <span class="nx">ginSwagger</span><span class="p">.</span><span class="nf">WrapHandler</span><span class="p">(</span><span class="nx">swaggerFiles</span><span class="p">.</span><span class="nx">Handler</span><span class="p">))</span>
-</code></pre></div><p>​        编译执行你的程序，在浏览器中输入这个路由，就能看到可交互式的swagger文档了</p>
-<h3 id="注释信息详解">注释信息详解</h3>
 </div>
         <div class="post-footer">
             <div class="info">
@@ -215,7 +209,7 @@ $ go get github.com/swaggo/files
 
 
 
-<span class="separator"><a class="tag" href="/tags/swagger/">swagger</a><a class="tag" href="/tags/gin/">gin</a></span>
+<span class="separator"><a class="tag" href="/tags/make/">make</a></span>
 
             </div>
         </div>
