@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html
+  dir="ltr"
+  lang="zh-cn"
+  data-theme=""
+><head>
+  <title>
+    
+      杨海瑞
+        |
+        MySQL事务详解
+
+
+      
+
+
+    
+  </title>
+
+  
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.81.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta
+    name="description"
+    content="
+      关于MySQL中的事务相关知识的整理
+
+
+    "
+  />
+  
+  
+  
+  <link
+    rel="stylesheet"
+    href="/css/main.min.f973b2d131b2161c2c7b6273828227d3fe579ddae99021e3b915d9f43d469f57.css"
+    integrity="sha256-&#43;XOy0TGyFhwse2JzgoIn0/5XndrpkCHjuRXZ9D1Gn1c="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  
+  <link
+    rel="stylesheet"
+    href="/css/markupHighlight.min.058b31f17db60602cc415fd63b0427e7932fbf35c70d8e341a4c39385f5f6f3e.css"
+    integrity="sha256-BYsx8X22BgLMQV/WOwQn55MvvzXHDY40Gkw5OF9fbz4="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+    crossorigin="anonymous"
+  />
+  
+  <link rel="shortcut icon" href="/favicons/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
+
+  <link rel="canonical" href="https://yanghairui.life/posts/mysql%E7%9A%84%E4%BA%8B%E5%8A%A1/" />
+
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/anatole-header.min.2a2cd9614b7d007dfbb75e8da19e3a0fa872ceab53c6d000c00b7a0c89b85bfc.js"
+    integrity="sha256-KizZYUt9AH37t16NoZ46D6hyzqtTxtAAwAt6DIm4W/w="
+    crossorigin="anonymous"
+  ></script>
+
+  
+    
+    
+    <script
+      type="text/javascript"
+      src="/js/anatole-theme-switcher.min.7fd87181cdd7e8413aa64b6867bb32f3a8dc242e684fc7d5bbb9f600dbc2b6eb.js"
+      integrity="sha256-f9hxgc3X6EE6pktoZ7sy86jcJC5oT8fVu7n2ANvCtus="
+      crossorigin="anonymous"
+    ></script>
+
+  
+
+
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="MySQL事务详解"/>
+<meta name="twitter:description" content="关于MySQL中的事务相关知识的整理"/>
+
+
+
+  
+
+
+  
+  
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "posts",
+        "name": "MySQL事务详解",
+        "headline": "MySQL事务详解",
+        "alternativeHeadline": "",
+        "description": "
+      关于MySQL中的事务相关知识的整理
+
+
+    ",
+        "inLanguage": "zh-cn",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/yanghairui.life\/posts\/mysql%E7%9A%84%E4%BA%8B%E5%8A%A1\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "杨海瑞"
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "杨海瑞"
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "杨海瑞"
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "杨海瑞"
+        },
+        "copyrightYear" : "2021",
+        "dateCreated": "2021-05-04T22:10:47.00Z",
+        "datePublished": "2021-05-04T22:10:47.00Z",
+        "dateModified": "2021-05-04T22:10:47.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "杨海瑞",
+            "url": "https://yanghairui.life",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/yanghairui.life\/favicons\/favicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+      ]
+
+    ,
+        "url" : "https:\/\/yanghairui.life\/posts\/mysql%E7%9A%84%E4%BA%8B%E5%8A%A1\/",
+        "wordCount" : "56",
+        "genre" : [ 
+      
+      "MySQL"
+
+    ],
+        "keywords" : [ 
+      
+      "Database"
+
+    
+      
+        ,
+
+      
+      "MySQL"
+
+    ]
+    }
+  </script>
+
+
+
+</head>
+<body>
+    <header><div
+  class="page-top 
+    animated fadeInDown
+
+  "
+>
+  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+    <span aria-hidden="true"></span>
+    <span aria-hidden="true"></span>
+    <span aria-hidden="true"></span>
+  </a>
+  <nav>
+    <ul class="nav__list" id="navMenu">
+      <div class="nav__links">
+        
+        
+          
+          <li>
+            <a
+              
+              href="/"
+              
+              title=""
+              >Home</a
+            >
+          </li>
+
+        
+          
+          <li>
+            <a
+              
+              href="/posts/"
+              
+              title=""
+              >Posts</a
+            >
+          </li>
+
+        
+          
+          <li>
+            <a
+              
+              href="/records/"
+              
+              title=""
+              >Records</a
+            >
+          </li>
+
+        
+          
+          <li>
+            <a
+              
+              href="/portfolio/"
+              
+              title=""
+              >Portfolio</a
+            >
+          </li>
+
+        
+          
+          <li>
+            <a
+              
+              href="/about/"
+              
+              title=""
+              >About</a
+            >
+          </li>
+
+        
+          
+          <li>
+            <a
+              
+              href="/contact/"
+              
+              title=""
+              >Contact</a
+            >
+          </li>
+
+        
+      </div>
+      <ul>
+        
+        
+          <li>
+            <a class="theme-switch" title="Switch Theme">
+              <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+          </li>
+
+        
+      </ul>
+    </ul>
+  </nav>
+</div>
+</header>
+    <div class="wrapper">
+      <aside><div
+  class="sidebar
+    animated fadeInDown
+
+  "
+>
+  <div class="sidebar__content">
+    <div class="logo-title">
+      <div class="title">
+        <img src="/images/profile5.jpg" alt="profile picture" />
+        <h3 title=""><a href="/">Harry Yang&#39;s Website</a></h3>
+        <div class="description">
+          <p><br />Per aspera ad astra.<br />循此苦旅，终抵群星。<br /></p>
+        </div>
+      </div>
+    </div>
+    <ul class="social-links">
+      
+        <li>
+          <a href="https://stackoverflow.com/users/12924262/horace-yang" rel="me" aria-label="StackOverFlow" title="StackOverFlow">
+            <i class="fab fa-stack-overflow fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li>
+          <a href="https://github.com/harryyann" rel="me" aria-label="GitHub" title="GitHub">
+            <i class="fab fa-github fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li>
+          <a href="https://www.zhihu.com/people/yang-hai-rui-88" rel="me" aria-label="zhihu" title="zhihu">
+            <i class="fab fa-zhihu fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li>
+          <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=941811450@qq.com" rel="me" aria-label="e-mail" title="e-mail">
+            <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+    </ul>
+  </div><footer class="footer footer--sidebar">
+  <div class="by_farbox">
+    <ul class="footer__list">
+      <li class="footer__item">
+        &copy;
+        
+          2021-2022
+
+        
+      </li>
+      
+    </ul>
+  </div>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.71100d84fab0ad794b8399a66ac810700cc78d703f715dc10af4d7ba7b761362.js"
+    integrity="sha256-cRANhPqwrXlLg5mmasgQcAzHjXA/cV3BCvTXunt2E2I="
+    crossorigin="anonymous"
+  ></script></div>
+</aside>
+      <main>
+        <div class="autopagerize_page_element">
+          <div class="content">
+  <div
+    class="post 
+      animated fadeInDown
+
+    "
+  >
+    <div class="post-content">
+      
+      <div class="post-title">
+        <h1>MySQL事务详解</h1>
+        
+      </div><h3 id="事务">事务</h3>
+<p>事务就是一组原子性的SQL语句。这一组SQL语句要么全部执行成功，要么全部不执行。只要有任何一条语句因为崩溃或其他原因无法执行，那么所有的语句都不会执行。事务处理系统需要包含以下四个特性(ACID)：</p>
+<ul>
+<li>原子性(atomicity)</li>
+</ul>
+<p>一个事务必须被看作 是不可分割的最小工作单元。不可能执行成功其中的一部分操作，要么全部提交成功，要么全部失败回滚。</p>
+<ul>
+<li>一致性(consistency)</li>
+</ul>
+<p>数据库总是从一个一致性的状态，转换到另一个一致性的状态。</p>
+<ul>
+<li>隔离性(isolation)</li>
+</ul>
+<p>一个事务所作的修改，在提交之前，通常对其他事务是不可见的。（后面再谈到事务的隔离等级的时候会解释为什么说&quot;通常&quot;）</p>
+<ul>
+<li>持久性(durability)</li>
+</ul>
+<p>一旦事务提交，那么所作的修改就会永久保存到数据库中。</p>
+<h3 id="事务隔离等级">事务隔离等级</h3>
+<p>关于上述的第三点，隔离性，实际上比较复杂。SQL标准中定义了四种隔离等级，规定了一个事务中所作的修改，哪些在事务内和事务间是可见的，哪些是不可见的。以下介绍一下四种隔离等级。</p>
+<h4 id="read-uncommitted未提交读">READ UNCOMMITTED(未提交读)</h4>
+<p>在未提交读这个级别下，所有事务中的修改，即使没有提交，其他事务也可以看到，这就叫做<code>脏读</code>。显而易见，这个级别会导致很多问题，并且性能上来说，也没有比其他隔离级别好很多，所以几乎是没人用的。</p>
+<h4 id="read-committed提交读">READ COMMITTED(提交读)</h4>
+<p>顾名思义，和上一个等级的差别就在于，该隔离等级下，每个事务是能读取到当前已提交的事务所作的修改，即一个事务在提交之前，对其他事务都是不可见的。这个等级是大多数数据库的默认隔离等级，但不是MySQL的。该级别下存在<code>不可重复读</code>的问题。</p>
+<ul>
+<li>不可重复读</li>
+</ul>
+<p>如果在一个事务执行过程中，有另一个事务从未提交状态，转变为了提交状态。那么那个事务所修改的行就会发生改变。如果在当前事务中前后两次查询这个行，就有可能两次查到的信息不一致。</p>
+<h4 id="repeatable-read可重复读">REPEATABLE READ(可重复读)</h4>
+<p>顾名思义，和上一个等级的差别在于，这个等级解决了上述的不可重复读的问题，保证了在一次事务中多次读取同一行数据的结果是一致的。解决方法是，在第一次SELECT的时候缓存查询记录，然后在后续的SELECT中复用这个缓存。但是可重复读无法解决<code>幻读</code>的问题。</p>
+<ul>
+<li>幻读</li>
+</ul>
+<p>所谓幻读，就是指在某个事务中多次读取某个范围的记录时，另一个事务在该范围中插入了一条记录并提交，则该事务后续的某次读取会出现多了一行的问题，这一行叫幻行，这就叫幻读。</p>
+<p>MySQL通过MVCC(多版本并发控制)和间隙锁(next-key locking)解决了幻读的问题。</p>
+<h4 id="serializable可串行化">SERIALIZABLE(可串行化)</h4>
+<p>最高的隔离级别。通过强制事务串行执行，避免前述的幻读的问题。可串行化隔离级别下会在每一行数据上都加锁，所以效率也是最低的。只有在非常需要保证数据的一致性的时候且可以接受没有并发的情况，才会采用该级别。</p>
+<table>
+<thead>
+<tr>
+<th>隔离级别</th>
+<th>是否脏读</th>
+<th>是否不可重复读</th>
+<th>是否幻读</th>
+<th>是否加锁</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>未提交读</td>
+<td>是</td>
+<td>是</td>
+<td>是</td>
+<td>否</td>
+</tr>
+<tr>
+<td>提交读</td>
+<td>否</td>
+<td>是</td>
+<td>是</td>
+<td>否</td>
+</tr>
+<tr>
+<td>可重复读</td>
+<td>否</td>
+<td>否</td>
+<td>是</td>
+<td>否</td>
+</tr>
+<tr>
+<td>可串行化</td>
+<td>否</td>
+<td>否</td>
+<td>否</td>
+<td>是</td>
+</tr>
+</tbody>
+</table>
+<p>为了解决死锁的问题，不同的数据库都实现了各种死锁检测和超时机制。InnoDB目前的处理方式是：将持有最少行级排他锁的事务进行回滚。</p>
+</div>
+    <div class="post-footer">
+      <div class="info">
+        
+          <span class="separator"><a class="category" href="/categories/mysql/">MySQL</a></span>
+
+
+
+
+        
+
+        
+          <span class="separator"><a class="tag" href="/tags/database/">Database</a><a class="tag" href="/tags/mysql/">MySQL</a></span>
+
+
+
+
+        
+      </div>
+    </div>
+
+    
+  </div>
+
+
+          </div>
+        </div>
+      </main>
+    </div><footer class="footer footer--base">
+  <div class="by_farbox">
+    <ul class="footer__list">
+      <li class="footer__item">
+        &copy;
+        
+          2021-2022
+
+        
+      </li>
+      
+    </ul>
+  </div>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.71100d84fab0ad794b8399a66ac810700cc78d703f715dc10af4d7ba7b761362.js"
+    integrity="sha256-cRANhPqwrXlLg5mmasgQcAzHjXA/cV3BCvTXunt2E2I="
+    crossorigin="anonymous"
+  ></script></body>
+</html>
