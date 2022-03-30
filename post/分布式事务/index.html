@@ -162,7 +162,7 @@
 
     ,
         "url" : "https:\/\/yanghairui.life\/post\/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1\/",
-        "wordCount" : "193",
+        "wordCount" : "223",
         "genre" : [ 
       
       "分布式"
@@ -373,7 +373,7 @@
               </span
             >
             <em class="fas fa-stopwatch"></em>
-            <span class="reading-time">阅读时间 1 分钟</span>
+            <span class="reading-time">阅读时间 2 分钟</span>
           </div>
 
         
@@ -598,7 +598,45 @@
 <p>2PC或者XA，是<strong>数据库存储资源层面的事务</strong>，实现的是强一致性，两阶段提交的整个阶段，一直会持有数据库的锁。</p>
 <p>TCC 关注的是业务层的正确提交和回滚，try阶段不涉及加锁，只是冻结资源，是<strong>业务层的分布式事务</strong>，关注最终一致性，不会一直持有各个资源的锁。</p>
 <p>TCC 的核心思想：就是<strong>针对每个业务操作，都要提供一个对应的准备、确认和补偿操作，同时把相关的处理，从数据库转移到业务中</strong>。</p>
+<h4 id="tcc模型常见的三种异常">TCC模型常见的三种异常</h4>
+<ol>
+<li>
+<p>空回滚</p>
+<p>空回滚就是一个分布式事务，在没有调用Try时，调用了Cancel方法，这种情况下就需要识别出来。</p>
+<p>比如增加一张事务控制表，每次Try时都记录事务ID，当调用了Cancel方法时，先查表，没有这个事务，直接返回成功即可。</p>
+</li>
+<li>
+<p>幂等</p>
+<p>这个就不说了，Confirm和Cancel都要保证幂等。</p>
+</li>
+<li>
+<p>悬挂</p>
+<p>当Cancel调用发生在了Try之前时，因为我们解决了空回滚，这时，就会一直挂在Try这里，资源一直被锁定。</p>
+<p>Seata的解决方法是，也是每次回滚也记录一张表，调Try时，查这张表，如果发现这个事务ID已经Cancel过了，就可以认为这个事务已经完事了，返回即可。</p>
+</li>
+</ol>
+<h2 id="saga">SAGA</h2>
+<p>Saga事务模型和TCC一样都是一种补偿协议，每个操作，都要提供自己的正向操作和逆向回滚操作，和TCC的区别在于，SAGA执行事务时，每个子事务是依次执行的，一个子事务执行成功了，才会去执行下一个子事务，一旦一个子事务执行失败，则前面执行成功的子事务都要回滚。如下图：</p>
+<p><img src="/images/transaction/saga.png" alt=""></p>
+<p>SAGA的这种执行方式就导致了事务的执行周期较长，适合于那种层层审核的业务，比如金融系统。</p>
 <h2 id="seata">Seata</h2>
+<p><a href="https://github.com/seata/seata">Seata</a>是阿里开源的分布式事务解决方案，它提供了AT、TCC、SAGA、XA四种事务模型。</p>
+<p>Seata中有三个核心的角色</p>
+<ul>
+<li><strong>TC（Transaction Coordinator）</strong> ：事务协调者，是<code>Server</code>端，要单独部署，维护全局和分支事务的状态，驱动全局事务提交或回滚;</li>
+<li><strong>TM（Transaction Manager）</strong> :是<code>Client</code>端，由业务服务集成，定义全局事务，发起分布式事务，和决定是提交还是回滚的某个业务服务。</li>
+<li><strong>RM（Resource Manager）</strong> ：是<code>Client</code>端，由业务服务集成，管理分支事务处理的资源，具体处理子事务的。</li>
+</ul>
+<p><img src="/images/transaction/seata.png" alt=""></p>
+<p>如上图，Seata管理的一个分布式事务的整个过程大致如下</p>
+<ul>
+<li><code>TM</code>要求<code>TC</code>开始一项新的全局事务。<code>TC</code>生成代表全局事务的<code>XID</code>。</li>
+<li><code>XID</code>会通过微服务的调用链传播到各个子事务所在的业务系统中。</li>
+<li><code>RM</code>将本地事务注册为这个<code>XID</code>到<code>TC</code>的全局事务的分支子事务。</li>
+<li><code>TM</code>要求<code>TC</code>提交或回退相应的<code>XID</code>全局事务。</li>
+<li><code>TC</code>驱动<code>XID</code>的相应全局事务下的所有分支事务以完成分支提交或回滚。</li>
+</ul>
+<p>具体的事务执行过程，则是根据选择的事务模型不同，有所区别。</p>
 </div>
     <div class="post-footer">
       <div class="info">
