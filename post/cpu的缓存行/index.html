@@ -90,7 +90,7 @@
   
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="CPU的cache line和false sharding问题"/>
-<meta name="twitter:description" content="CPU的多级缓存 随着计算机进入多核时代，CPU处理速度和内存之间的鸿沟越来越大，因此多核CPU都通过缓存行提高CPU和内存的交互效率。CPU 缓存（Cache Memory）是位于 CPU 与内存之间的临时存储器，它的容量比内存小的多但是交换速度却比内存要快得多。在缓存中的数据是内存中的一小部分，但这一小部分是短时间内 CPU 即将访问的，当 CPU 调用大量数据时，就可避开内存直接从缓存中调用，从而加快读取速度。"/>
+<meta name="twitter:description" content="一、CPU的多级缓存 随着计算机进入多核时代，CPU处理速度和内存之间的鸿沟越来越大，因此多核CPU都通过缓存行提高CPU和内存的交互效率。CPU 缓存（Cache Memory）是位于 CPU 与内存之间的临时存储器，它的容量比内存小的多但是交换速度却比内存要快得多。在缓存中的数据是内存中的一小部分，但这一小部分是短时间内 CPU 即将访问的，当 CPU 调用大量数据时，就可避开内存直接从缓存中调用，从而加快读取速度。"/>
 
 
 
@@ -111,7 +111,7 @@
         "alternativeHeadline": "",
         "description": "
       
-        CPU的多级缓存 随着计算机进入多核时代，CPU处理速度和内存之间的鸿沟越来越大，因此多核CPU都通过缓存行提高CPU和内存的交互效率。CPU 缓存（Cache Memory）是位于 CPU 与内存之间的临时存储器，它的容量比内存小的多但是交换速度却比内存要快得多。在缓存中的数据是内存中的一小部分，但这一小部分是短时间内 CPU 即将访问的，当 CPU 调用大量数据时，就可避开内存直接从缓存中调用，从而加快读取速度。
+        一、CPU的多级缓存 随着计算机进入多核时代，CPU处理速度和内存之间的鸿沟越来越大，因此多核CPU都通过缓存行提高CPU和内存的交互效率。CPU 缓存（Cache Memory）是位于 CPU 与内存之间的临时存储器，它的容量比内存小的多但是交换速度却比内存要快得多。在缓存中的数据是内存中的一小部分，但这一小部分是短时间内 CPU 即将访问的，当 CPU 调用大量数据时，就可避开内存直接从缓存中调用，从而加快读取速度。
 
 
       
@@ -288,8 +288,8 @@
   <div class="sidebar__content">
     <div class="logo-title">
       <div class="title">
-        <img src="/images/profile5.jpg" alt="profile picture" />
-        <h3 title=""><a href="/">Harry Yang&#39;s Website</a></h3>
+        <img src="/images/profile-2023-06-23.jpg" alt="profile picture" />
+        <h3 title=""><a href="/">Harry&#39;s Website</a></h3>
         <div class="description">
           <p>Per aspera ad astra.<br />循此苦旅，终抵群星。<br /></p>
         </div>
@@ -311,20 +311,6 @@
         </li>
 
       
-        <li>
-          <a href="https://www.zhihu.com/people/yang-hai-rui-88" rel="me" aria-label="zhihu" title="zhihu">
-            <i class="fab fa-zhihu fa-2x" aria-hidden="true"></i>
-          </a>
-        </li>
-
-      
-        <li>
-          <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=941811450@qq.com" rel="me" aria-label="e-mail" title="e-mail">
-            <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
-          </a>
-        </li>
-
-      
     </ul>
   </div><footer class="footer footer--sidebar">
   <div class="by_farbox">
@@ -332,7 +318,7 @@
       <li class="footer__item">
         &copy;
         
-          2021-2022
+          2022-2023
 
         
       </li>
@@ -376,7 +362,7 @@
           </div>
 
         
-      </div><h1 id="cpu的多级缓存">CPU的多级缓存</h1>
+      </div><h1 id="一cpu的多级缓存">一、CPU的多级缓存</h1>
 <p>随着计算机进入多核时代，CPU处理速度和内存之间的鸿沟越来越大，因此多核CPU都通过缓存行提高CPU和内存的交互效率。CPU 缓存（Cache Memory）是位于 CPU 与内存之间的临时存储器，它的容量比内存小的多但是交换速度却比内存要快得多。在缓存中的数据是内存中的一小部分，但这一小部分是短时间内 CPU 即将访问的，当 CPU 调用大量数据时，就可避开内存直接从缓存中调用，从而加快读取速度。</p>
 <p>CPU根据型号不同缓存的数量也不同，一般会有三层以上的缓存，：</p>
 <p><img src="/images/cacheline/cacheline.png" alt=""></p>
@@ -406,7 +392,7 @@
 <li>缓存级数越多，多个缓存命中反而速度会下降。</li>
 <li>由于核心独立缓存的设置，还要考虑多个核心访问同一块数据时的同步问题，明显缓存级数越多，同步过程越复杂。</li>
 </ul>
-<h1 id="cache-line">Cache line</h1>
+<h1 id="二cache-line">二、Cache line</h1>
 <p>缓存系统中是以缓存行（cache line）为单位存储的，CPU 从内存中捞数据时都是一次性捞多个，而不是一次只捞一个字节，这样效率太低。而 CPU 每次从内存中加载到的数据的大小就是<strong>缓存行(Cache line)</strong>。主流的大小是<strong>64字节</strong>，就是16个32位的整型数据，即如果有一个 int32 类型的数组，那么在CPU加载数组的第一个元素时，会把数组的前16个元素全部加载到 L3 缓存中。但如果你用的是链表存储数据，链表中的并不是挨着的，也就不能用到CPU缓存所带来的性能提升。</p>
 <p>因为cache line缓存行有固定值，所以<strong>L1、L2、L3都得是cache line的倍数</strong>。可以理解为CPU的多级缓存中就是一个又一个的cache line。</p>
 <h2 id="cpu加载内存数据的过程">CPU加载内存数据的过程</h2>
@@ -421,7 +407,7 @@
 <li>write through：写操作同时写cache和内存。</li>
 </ul>
 <p>因为内存和cache的性能鸿沟，所以同时写的话太慢了，一般都会采用write back的方案。但是这样就会有这样一个场景，当多个线程操作的数据，刚好在同一个缓存行时，就需要通过协议来进行同步，大量同步反而会造成性能下降，甚至还不如没有缓存行，就出现了<strong>伪共享</strong>(False sharding)问题。</p>
-<h1 id="false-sharding">False sharding</h1>
+<h1 id="三false-sharding">三、False sharding</h1>
 <h2 id="mesi协议和rfo请求">MESI协议和RFO请求</h2>
 <p>多线程编程时，一个核想要访问另一个核的 L1 或 L2 级缓存上的数据时，该怎么办呢？容易想到的方法是让这个核直接跨核心去访问另一个核的数据，这种方法的缺点是速度不够快，跨核访问需要通过 Memory Controller (内存控制器，用于CPU核心间的数据交换)。典型的情况是第 2 个核经常访问第 1 个核的这条数据，那么每次都有跨核的消耗。更糟的是，有可能第 2 个核与第 1 个核就不在一个插槽内；况且 Memory Controller 的总线带宽是有限的，也扛不住这么多数据传输。</p>
 <p>所以CPU 设计者们更偏向于另一种办法： 如果第 2 个核需要这份数据，就由第 1 个核直接把数据内容发过去，既然你要用这块缓存，我就把这块缓存全都发给你，免得你老是来找我要。</p>
@@ -493,7 +479,7 @@
       <li class="footer__item">
         &copy;
         
-          2021-2022
+          2022-2023
 
         
       </li>

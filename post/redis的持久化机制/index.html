@@ -92,7 +92,7 @@
 <meta name="twitter:title" content="Redis的持久化机制"/>
 <meta name="twitter:description" content="Redis的持久化 Redis 的读写都是在内存中，所以它的性能较高，但在内存中的数据会随着服务器的重启而丢失，为了保证数据不丢失，我们需要将内存中的数据存储到磁盘，以便 Redis 重启时能够从磁盘中恢复原有的数据，而整个过程就叫做 Redis 持久化。
 Redis的可持久化也是redis和memcached的主要区别之一，Memcached没有持久化机制。
-Redis持久化的方式 快照方式RDB RDB(Redis DataBase)，某一个时刻，将当前内存中存储的所有数据形成一个快照，并以二进制形式写入磁盘。"/>
+Redis持久化的方式 一、快照方式RDB RDB(Redis DataBase)，某一个时刻，将当前内存中存储的所有数据形成一个快照，并以二进制形式写入磁盘。"/>
 
 
 
@@ -113,7 +113,7 @@ Redis持久化的方式 快照方式RDB RDB(Redis DataBase)，某一个时刻，
         "alternativeHeadline": "",
         "description": "
       
-        Redis的持久化 Redis 的读写都是在内存中，所以它的性能较高，但在内存中的数据会随着服务器的重启而丢失，为了保证数据不丢失，我们需要将内存中的数据存储到磁盘，以便 Redis 重启时能够从磁盘中恢复原有的数据，而整个过程就叫做 Redis 持久化。\nRedis的可持久化也是redis和memcached的主要区别之一，Memcached没有持久化机制。\nRedis持久化的方式 快照方式RDB RDB(Redis DataBase)，某一个时刻，将当前内存中存储的所有数据形成一个快照，并以二进制形式写入磁盘。
+        Redis的持久化 Redis 的读写都是在内存中，所以它的性能较高，但在内存中的数据会随着服务器的重启而丢失，为了保证数据不丢失，我们需要将内存中的数据存储到磁盘，以便 Redis 重启时能够从磁盘中恢复原有的数据，而整个过程就叫做 Redis 持久化。\nRedis的可持久化也是redis和memcached的主要区别之一，Memcached没有持久化机制。\nRedis持久化的方式 一、快照方式RDB RDB(Redis DataBase)，某一个时刻，将当前内存中存储的所有数据形成一个快照，并以二进制形式写入磁盘。
 
 
       
@@ -283,8 +283,8 @@ Redis持久化的方式 快照方式RDB RDB(Redis DataBase)，某一个时刻，
   <div class="sidebar__content">
     <div class="logo-title">
       <div class="title">
-        <img src="/images/profile5.jpg" alt="profile picture" />
-        <h3 title=""><a href="/">Harry Yang&#39;s Website</a></h3>
+        <img src="/images/profile-2023-06-23.jpg" alt="profile picture" />
+        <h3 title=""><a href="/">Harry&#39;s Website</a></h3>
         <div class="description">
           <p>Per aspera ad astra.<br />循此苦旅，终抵群星。<br /></p>
         </div>
@@ -306,20 +306,6 @@ Redis持久化的方式 快照方式RDB RDB(Redis DataBase)，某一个时刻，
         </li>
 
       
-        <li>
-          <a href="https://www.zhihu.com/people/yang-hai-rui-88" rel="me" aria-label="zhihu" title="zhihu">
-            <i class="fab fa-zhihu fa-2x" aria-hidden="true"></i>
-          </a>
-        </li>
-
-      
-        <li>
-          <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=941811450@qq.com" rel="me" aria-label="e-mail" title="e-mail">
-            <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
-          </a>
-        </li>
-
-      
     </ul>
   </div><footer class="footer footer--sidebar">
   <div class="by_farbox">
@@ -327,7 +313,7 @@ Redis持久化的方式 快照方式RDB RDB(Redis DataBase)，某一个时刻，
       <li class="footer__item">
         &copy;
         
-          2021-2022
+          2022-2023
 
         
       </li>
@@ -375,11 +361,11 @@ Redis持久化的方式 快照方式RDB RDB(Redis DataBase)，某一个时刻，
 <p>Redis 的读写都是在内存中，所以它的性能较高，但在内存中的数据会随着服务器的重启而丢失，为了保证数据不丢失，我们需要将内存中的数据存储到磁盘，以便 Redis 重启时能够从磁盘中恢复原有的数据，而整个过程就叫做 Redis 持久化。</p>
 <p>Redis的可持久化也是redis和memcached的主要区别之一，Memcached没有持久化机制。</p>
 <h2 id="redis持久化的方式">Redis持久化的方式</h2>
-<h4 id="快照方式rdb">快照方式RDB</h4>
+<h4 id="一快照方式rdb">一、快照方式RDB</h4>
 <p>RDB(Redis DataBase)，某一个时刻，将当前内存中存储的所有数据形成一个快照，并以二进制形式写入磁盘。</p>
-<h4 id="文件追加方式aof">文件追加方式AOF</h4>
+<h4 id="二文件追加aof">二、文件追加AOF</h4>
 <p>AOF(append only file)，将操作命令，以文本追加的形式写入文件。</p>
-<h4 id="混合持久化方式">混合持久化方式</h4>
+<h4 id="三混合持久化方式">三、混合持久化方式</h4>
 <p>Redis4.0以后支持的方式，由于AOF的文件占用空间大，而RDB的文件占用空间小，但是RDB丢数据比较多，所以有了这种AOF和RDB混合的持久化优化方式，触发时会将当前的内存快照转为RDB文件，但是后续记录的仍是AOF的逐条写入。这样既可以让持久化文件变得小一些，可以提高重启时数据恢复的速度。同时AOF机制也能降低RDB机制的数据丢失风险。</p>
 <h1 id="rdb">RDB</h1>
 <p>将某一时刻的<strong>内存快照</strong>，以<strong>二进制</strong>的形式写入磁盘，生成dump.rdb文件。</p>
@@ -555,7 +541,7 @@ dir ./
 <li>在redis负载较高时，RDB效率更高，因为<strong>AOF会阻塞主线程</strong>。</li>
 <li>RDB是拷贝内存快照，而AOF是追加写入磁盘，理论上说RDB更不容易出现错误。</li>
 </ul>
-<h1 id="混合持久化方式-1">混合持久化方式</h1>
+<h1 id="混合持久化方式">混合持久化方式</h1>
 <p>Redis4.0后增加了混合持久化的方式，结合rdb和aof的优点，redis5.0以后这个是默认开启的。</p>
 <h2 id="配置混合持久化">配置混合持久化</h2>
 <p>同样有两种方式可以开启混合持久化：</p>
@@ -625,7 +611,7 @@ dir ./
       <li class="footer__item">
         &copy;
         
-          2021-2022
+          2022-2023
 
         
       </li>

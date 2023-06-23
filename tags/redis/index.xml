@@ -28,7 +28,7 @@
       
         <description>Redis的持久化 Redis 的读写都是在内存中，所以它的性能较高，但在内存中的数据会随着服务器的重启而丢失，为了保证数据不丢失，我们需要将内存中的数据存储到磁盘，以便 Redis 重启时能够从磁盘中恢复原有的数据，而整个过程就叫做 Redis 持久化。
 Redis的可持久化也是redis和memcached的主要区别之一，Memcached没有持久化机制。
-Redis持久化的方式 快照方式RDB RDB(Redis DataBase)，某一个时刻，将当前内存中存储的所有数据形成一个快照，并以二进制形式写入磁盘。</description>
+Redis持久化的方式 一、快照方式RDB RDB(Redis DataBase)，某一个时刻，将当前内存中存储的所有数据形成一个快照，并以二进制形式写入磁盘。</description>
       
     </item>
     

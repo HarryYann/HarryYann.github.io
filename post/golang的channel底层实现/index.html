@@ -90,7 +90,7 @@
   
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Golang的channel底层实现"/>
-<meta name="twitter:description" content="Channel的底层数据结构 channel是golang在语言层面提供的goroutine通信机制，也是我们经常使用的数据结构，它的数据结构如下：
+<meta name="twitter:description" content="一、Channel的底层数据结构 channel是golang在语言层面提供的goroutine通信机制，也是我们经常使用的数据结构，它的数据结构如下：
 // 在src/runtime/chan.go中定义  type hchan struct{  // 环形队列相关  qcount uint // 当前队列中剩余元素的个数  dataqsiz uint // 环形队列的长度，即可以存放的元素个数  buf unsafe."/>
 
 
@@ -112,7 +112,7 @@
         "alternativeHeadline": "",
         "description": "
       
-        Channel的底层数据结构 channel是golang在语言层面提供的goroutine通信机制，也是我们经常使用的数据结构，它的数据结构如下：\n\/\/ 在src\/runtime\/chan.go中定义  type hchan struct{  \/\/ 环形队列相关  qcount uint \/\/ 当前队列中剩余元素的个数  dataqsiz uint \/\/ 环形队列的长度，即可以存放的元素个数  buf unsafe.
+        一、Channel的底层数据结构 channel是golang在语言层面提供的goroutine通信机制，也是我们经常使用的数据结构，它的数据结构如下：\n\/\/ 在src\/runtime\/chan.go中定义  type hchan struct{  \/\/ 环形队列相关  qcount uint \/\/ 当前队列中剩余元素的个数  dataqsiz uint \/\/ 环形队列的长度，即可以存放的元素个数  buf unsafe.
 
 
       
@@ -282,8 +282,8 @@
   <div class="sidebar__content">
     <div class="logo-title">
       <div class="title">
-        <img src="/images/profile5.jpg" alt="profile picture" />
-        <h3 title=""><a href="/">Harry Yang&#39;s Website</a></h3>
+        <img src="/images/profile-2023-06-23.jpg" alt="profile picture" />
+        <h3 title=""><a href="/">Harry&#39;s Website</a></h3>
         <div class="description">
           <p>Per aspera ad astra.<br />循此苦旅，终抵群星。<br /></p>
         </div>
@@ -305,20 +305,6 @@
         </li>
 
       
-        <li>
-          <a href="https://www.zhihu.com/people/yang-hai-rui-88" rel="me" aria-label="zhihu" title="zhihu">
-            <i class="fab fa-zhihu fa-2x" aria-hidden="true"></i>
-          </a>
-        </li>
-
-      
-        <li>
-          <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=941811450@qq.com" rel="me" aria-label="e-mail" title="e-mail">
-            <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
-          </a>
-        </li>
-
-      
     </ul>
   </div><footer class="footer footer--sidebar">
   <div class="by_farbox">
@@ -326,7 +312,7 @@
       <li class="footer__item">
         &copy;
         
-          2021-2022
+          2022-2023
 
         
       </li>
@@ -370,7 +356,7 @@
           </div>
 
         
-      </div><h1 id="channel的底层数据结构">Channel的底层数据结构</h1>
+      </div><h1 id="一channel的底层数据结构">一、Channel的底层数据结构</h1>
 <p>channel是golang在语言层面提供的goroutine通信机制，也是我们经常使用的数据结构，它的数据结构如下：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// 在src/runtime/chan.go中定义
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
@@ -457,7 +443,7 @@
 <h4 id="缓冲区满了">缓冲区满了</h4>
 <p>如果缓冲区没有空余位置，则此时写入时就是写阻塞，需要将当前G加入到sendq中，同时该goroutine进入睡眠状态，等待被唤醒，被唤醒后才能接着写。</p>
 <p><img src="/images/chan/write.png" alt=""></p>
-<h2 id="读数据的过程">读数据的过程</h2>
+<h1 id="二读数据的过程">二、读数据的过程</h1>
 <p>读数据分为四种情况：有写阻塞且chan没有缓冲区、有写阻塞且chan有缓冲区、没有写阻塞且缓冲区中有数据、没有写阻塞且缓冲区中无数据。</p>
 <h4 id="有写阻塞且chan没有缓冲区">有写阻塞且chan没有缓冲区</h4>
 <p>chan没有缓冲区的情况，每个写入都会是写阻塞，每个读取都是读阻塞，此时不管是要写数据还是读数据，都需要另一个goroutine同时在读或写。换句话说，没有缓冲区的chan的读写，实际上就是一个goroutine把数据直接交给了另一个goroutine。</p>
@@ -469,7 +455,7 @@
 <h4 id="没有写阻塞且缓冲区中无数据">没有写阻塞且缓冲区中无数据</h4>
 <p>这种情况下可能是刚开始创建chan时，还没有goroutine向chan中写入数据，此时从chan中读取数据就会被阻塞，这个goroutine会把自己的G写入到recvq中，同时自己进入睡眠状态，等待被写操作的G唤醒。</p>
 <p><img src="/images/chan/read.png" alt=""></p>
-<h1 id="channel的关闭的问题">Channel的关闭的问题</h1>
+<h1 id="三channel的关闭的问题">三、Channel的关闭的问题</h1>
 <p>关闭channel时会对等待队列中的G做如下操作：</p>
 <ul>
 <li>把读阻塞recvq中的G全部唤醒，并向这些G中发送chan数据类型的0值。</li>
@@ -491,7 +477,7 @@
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">ok</span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">有效</span>
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h1 id="channel的常见用法">Channel的常见用法</h1>
+</span></span></code></pre></div><h1 id="四channel的常见用法">四、Channel的常见用法</h1>
 <h2 id="单向chan">单向chan</h2>
 <p>指只用于发送，或者只用于接收的chan，实际上没有单向的chan，这里说的只是使用限制，即限制一个chan在一个函数内为只读或者只写，通过函数传参时指定：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">readChan</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>){} <span style="color:#75715e">// 通过形参指定函数中只能读c的数据
@@ -547,7 +533,7 @@
       <li class="footer__item">
         &copy;
         
-          2021-2022
+          2022-2023
 
         
       </li>

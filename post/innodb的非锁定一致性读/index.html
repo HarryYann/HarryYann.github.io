@@ -8,7 +8,7 @@
     
       杨海瑞
         |
-        InnoDB的非锁定一致性读
+        InnoDB引擎的非锁定一致性读
 
 
       
@@ -89,7 +89,7 @@
 
   
   <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="InnoDB的非锁定一致性读"/>
+<meta name="twitter:title" content="InnoDB引擎的非锁定一致性读"/>
 <meta name="twitter:description" content="非锁定一致性读 在《MySQL的锁》这篇文章中我介绍了MySQL的锁定一致性读，即通过加锁的方式来保证读取数据的正确性。而为了提高效率，InnoDB还实现了非锁定的一致性读，即读取操作不需要等待行锁的释放就可以完成数据读取，提高读的效率。这也是InnoDB默认的读取方式。
 实现方式 InnoDB通过版本控制的方式读取当前执行时间数据库中的快照数据，快照数据是指该行之前版本的数据，如上图所示，当要读取的数据被加了X锁时，可以不等到锁释放，而是直接读取数据旧版本的快照，即可实现一致性读。而在不同的事务隔离级别下，读取数据的版本也不同，这就是行多版本技术，由此带来的并发控制，就是多版本并发控制（Multi Version Concurrency Control，MVCC）。
 MVCC MVCC是一种概念，很多数据库都有自己的实现，而InnoDB的实现方式是结合自己的undo log和在表中增加了两个隐藏的字段实现的。"/>
@@ -108,8 +108,8 @@ MVCC MVCC是一种概念，很多数据库都有自己的实现，而InnoDB的�
         "@context": "http://schema.org",
         "@type": "BlogPosting",
         "articleSection": "post",
-        "name": "InnoDB的非锁定一致性读",
-        "headline": "InnoDB的非锁定一致性读",
+        "name": "InnoDB引擎的非锁定一致性读",
+        "headline": "InnoDB引擎的非锁定一致性读",
         "alternativeHeadline": "",
         "description": "
       
@@ -283,8 +283,8 @@ MVCC MVCC是一种概念，很多数据库都有自己的实现，而InnoDB的�
   <div class="sidebar__content">
     <div class="logo-title">
       <div class="title">
-        <img src="/images/profile5.jpg" alt="profile picture" />
-        <h3 title=""><a href="/">Harry Yang&#39;s Website</a></h3>
+        <img src="/images/profile-2023-06-23.jpg" alt="profile picture" />
+        <h3 title=""><a href="/">Harry&#39;s Website</a></h3>
         <div class="description">
           <p>Per aspera ad astra.<br />循此苦旅，终抵群星。<br /></p>
         </div>
@@ -306,20 +306,6 @@ MVCC MVCC是一种概念，很多数据库都有自己的实现，而InnoDB的�
         </li>
 
       
-        <li>
-          <a href="https://www.zhihu.com/people/yang-hai-rui-88" rel="me" aria-label="zhihu" title="zhihu">
-            <i class="fab fa-zhihu fa-2x" aria-hidden="true"></i>
-          </a>
-        </li>
-
-      
-        <li>
-          <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=941811450@qq.com" rel="me" aria-label="e-mail" title="e-mail">
-            <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
-          </a>
-        </li>
-
-      
     </ul>
   </div><footer class="footer footer--sidebar">
   <div class="by_farbox">
@@ -327,7 +313,7 @@ MVCC MVCC是一种概念，很多数据库都有自己的实现，而InnoDB的�
       <li class="footer__item">
         &copy;
         
-          2021-2022
+          2022-2023
 
         
       </li>
@@ -355,7 +341,7 @@ MVCC MVCC是一种概念，很多数据库都有自己的实现，而InnoDB的�
     <div class="post-content">
       
       <div class="post-title">
-        <h1>InnoDB的非锁定一致性读</h1>
+        <h1>InnoDB引擎的非锁定一致性读</h1>
         
           <div class="info">
             <em class="fas fa-calendar-day"></em>
@@ -522,7 +508,7 @@ MVCC MVCC是一种概念，很多数据库都有自己的实现，而InnoDB的�
       <li class="footer__item">
         &copy;
         
-          2021-2022
+          2022-2023
 
         
       </li>

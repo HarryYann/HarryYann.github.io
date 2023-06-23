@@ -14,7 +14,7 @@
       
       <guid>https://yanghairui.life/post/golang%E7%9A%84gc/</guid>
       
-        <description>GC 编程语言的内存管理方式就两种：自动和手动。像C/C++、Rust这种极致追求性能的语言就是要程序员手动进行内存空间的使用和释放。而像Java、Go等语言就是使用自动的方式进行内存管理，通过内存分配器就行内存分配，通过垃圾收集器进行垃圾回收。
+        <description>一、GC 编程语言的内存管理方式就两种：自动和手动。像C/C++、Rust这种极致追求性能的语言就是要程序员手动进行内存空间的使用和释放。而像Java、Go等语言就是使用自动的方式进行内存管理，通过内存分配器就行内存分配，通过垃圾收集器进行垃圾回收。
 GC，全称 Garbage Collection，即垃圾回收，就是一种自动内存管理的机制。通过垃圾回收程序员可以专注于写程序，不用考虑内存的释放问题。
 常见的GC方式 主要包括两种：
   引用计数GC</description>
@@ -81,7 +81,7 @@ Singleflight的使用 singleflight 库，直译过来就是单飞，这个库的
       
       <guid>https://yanghairui.life/post/golang%E7%9A%84channel%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0/</guid>
       
-        <description>Channel的底层数据结构 channel是golang在语言层面提供的goroutine通信机制，也是我们经常使用的数据结构，它的数据结构如下：
+        <description>一、Channel的底层数据结构 channel是golang在语言层面提供的goroutine通信机制，也是我们经常使用的数据结构，它的数据结构如下：
 // 在src/runtime/chan.go中定义  type hchan struct{  // 环形队列相关  qcount uint // 当前队列中剩余元素的个数  dataqsiz uint // 环形队列的长度，即可以存放的元素个数  buf unsafe.</description>
       
     </item>
@@ -106,7 +106,7 @@ Singleflight的使用 singleflight 库，直译过来就是单飞，这个库的
       
       <guid>https://yanghairui.life/post/deferselect%E5%92%8Crange%E7%9A%84%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/</guid>
       
-        <description>Defer defer语句用于延迟函数的调用，每次defer都会把一个函数压入栈中，当前函数返回前，再把延迟的函数取出来并执行，所以多个defer语句是后写的先执行的。
+        <description>一、Defer defer语句用于延迟函数的调用，每次defer都会把一个函数压入栈中，当前函数返回前，再把延迟的函数取出来并执行，所以多个defer语句是后写的先执行的。
 几个题目 问题1：以下输出什么？ func deferFuncParameter() {  var aInt = 1   defer fmt.</description>
       
     </item>
@@ -118,7 +118,7 @@ Singleflight的使用 singleflight 库，直译过来就是单飞，这个库的
       
       <guid>https://yanghairui.life/post/golang%E7%9A%84map%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0/</guid>
       
-        <description>Map的底层数据结构 Golang的map数据类型底层使用的是哈希表实现，一个哈希表可以有多个哈希表节点，即bucket，一个bucket保存着map中的一个或者一组键值对。
+        <description>一、Map的底层数据结构 Golang的map数据类型底层使用的是哈希表实现，一个哈希表可以有多个哈希表节点，即bucket，一个bucket保存着map中的一个或者一组键值对。
 hmap的数据结构： map的实现实际上就是runtime包里的hmap：
 // 定义在src/runtime/map.go中  type hmap struct{  count int // 当前保存的元素个数  .</description>
       

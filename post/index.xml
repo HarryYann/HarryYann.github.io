@@ -14,7 +14,7 @@
       
       <guid>https://yanghairui.life/post/golang%E7%9A%84gc/</guid>
       
-        <description>GC 编程语言的内存管理方式就两种：自动和手动。像C/C++、Rust这种极致追求性能的语言就是要程序员手动进行内存空间的使用和释放。而像Java、Go等语言就是使用自动的方式进行内存管理，通过内存分配器就行内存分配，通过垃圾收集器进行垃圾回收。
+        <description>一、GC 编程语言的内存管理方式就两种：自动和手动。像C/C++、Rust这种极致追求性能的语言就是要程序员手动进行内存空间的使用和释放。而像Java、Go等语言就是使用自动的方式进行内存管理，通过内存分配器就行内存分配，通过垃圾收集器进行垃圾回收。
 GC，全称 Garbage Collection，即垃圾回收，就是一种自动内存管理的机制。通过垃圾回收程序员可以专注于写程序，不用考虑内存的释放问题。
 常见的GC方式 主要包括两种：
   引用计数GC</description>
@@ -123,7 +123,7 @@ Singleflight的使用 singleflight 库，直译过来就是单飞，这个库的
       
       <guid>https://yanghairui.life/post/cpu%E7%9A%84%E7%BC%93%E5%AD%98%E8%A1%8C/</guid>
       
-        <description>CPU的多级缓存 随着计算机进入多核时代，CPU处理速度和内存之间的鸿沟越来越大，因此多核CPU都通过缓存行提高CPU和内存的交互效率。CPU 缓存（Cache Memory）是位于 CPU 与内存之间的临时存储器，它的容量比内存小的多但是交换速度却比内存要快得多。在缓存中的数据是内存中的一小部分，但这一小部分是短时间内 CPU 即将访问的，当 CPU 调用大量数据时，就可避开内存直接从缓存中调用，从而加快读取速度。</description>
+        <description>一、CPU的多级缓存 随着计算机进入多核时代，CPU处理速度和内存之间的鸿沟越来越大，因此多核CPU都通过缓存行提高CPU和内存的交互效率。CPU 缓存（Cache Memory）是位于 CPU 与内存之间的临时存储器，它的容量比内存小的多但是交换速度却比内存要快得多。在缓存中的数据是内存中的一小部分，但这一小部分是短时间内 CPU 即将访问的，当 CPU 调用大量数据时，就可避开内存直接从缓存中调用，从而加快读取速度。</description>
       
     </item>
     
@@ -140,7 +140,7 @@ Singleflight的使用 singleflight 库，直译过来就是单飞，这个库的
     </item>
     
     <item>
-      <title>分库分表的实现方式</title>
+      <title>MySQL分库分表的实现方式</title>
       <link>https://yanghairui.life/post/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E7%9A%84%E6%96%B9%E6%A1%88/</link>
       <pubDate>Thu, 30 Sep 2021 17:56:02 +0800</pubDate>
       
@@ -170,7 +170,7 @@ Singleflight的使用 singleflight 库，直译过来就是单飞，这个库的
       
       <guid>https://yanghairui.life/post/golang%E7%9A%84channel%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0/</guid>
       
-        <description>Channel的底层数据结构 channel是golang在语言层面提供的goroutine通信机制，也是我们经常使用的数据结构，它的数据结构如下：
+        <description>一、Channel的底层数据结构 channel是golang在语言层面提供的goroutine通信机制，也是我们经常使用的数据结构，它的数据结构如下：
 // 在src/runtime/chan.go中定义  type hchan struct{  // 环形队列相关  qcount uint // 当前队列中剩余元素的个数  dataqsiz uint // 环形队列的长度，即可以存放的元素个数  buf unsafe.</description>
       
     </item>
@@ -234,7 +234,7 @@ Singleflight的使用 singleflight 库，直译过来就是单飞，这个库的
       
       <guid>https://yanghairui.life/post/deferselect%E5%92%8Crange%E7%9A%84%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/</guid>
       
-        <description>Defer defer语句用于延迟函数的调用，每次defer都会把一个函数压入栈中，当前函数返回前，再把延迟的函数取出来并执行，所以多个defer语句是后写的先执行的。
+        <description>一、Defer defer语句用于延迟函数的调用，每次defer都会把一个函数压入栈中，当前函数返回前，再把延迟的函数取出来并执行，所以多个defer语句是后写的先执行的。
 几个题目 问题1：以下输出什么？ func deferFuncParameter() {  var aInt = 1   defer fmt.</description>
       
     </item>
@@ -246,7 +246,7 @@ Singleflight的使用 singleflight 库，直译过来就是单飞，这个库的
       
       <guid>https://yanghairui.life/post/golang%E7%9A%84map%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0/</guid>
       
-        <description>Map的底层数据结构 Golang的map数据类型底层使用的是哈希表实现，一个哈希表可以有多个哈希表节点，即bucket，一个bucket保存着map中的一个或者一组键值对。
+        <description>一、Map的底层数据结构 Golang的map数据类型底层使用的是哈希表实现，一个哈希表可以有多个哈希表节点，即bucket，一个bucket保存着map中的一个或者一组键值对。
 hmap的数据结构： map的实现实际上就是runtime包里的hmap：
 // 定义在src/runtime/map.go中  type hmap struct{  count int // 当前保存的元素个数  .</description>
       
@@ -296,16 +296,16 @@ type Server struct {  Addr string  Port int  Protocol string  Timeout time.</des
       
       <guid>https://yanghairui.life/post/docker%E7%9A%84%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/</guid>
       
-        <description>Docker容器技术 容器是一种沙盒技术，可以像一个集装箱一样，把你写的应用程序包起来，这样多个应用之间就会有各自的边界而不互相干扰，而这个容器也可以随意的搬来搬去。容器在外在表现上就像一个轻量级的虚拟机，它有自己的文件系统，自己的CPU和内存大小，自己的网络栈等等，多个容器运行在同一台宿主机上，就像每个容器各自从一台物理机上切了一块一样。但是容器并不像虚拟机一样采用了虚拟化技术，而是直接在操作系统上就可以隔离出多个容器。下面这张图就是容器和虚拟机的对比图：
+        <description>一、容器技术 容器是一种沙盒技术，可以像一个集装箱一样，把你写的应用程序包起来，这样多个应用之间就会有各自的边界而不互相干扰，而这个容器也可以随意的搬来搬去。容器在外在表现上就像一个轻量级的虚拟机，它有自己的文件系统，自己的CPU和内存大小，自己的网络栈等等，多个容器运行在同一台宿主机上，就像每个容器各自从一台物理机上切了一块一样。但是容器并不像虚拟机一样采用了虚拟化技术，而是直接在操作系统上就可以隔离出多个容器。下面这张图就是容器和虚拟机的对比图：
 左侧就是虚拟机的实现原理，通过Hypervisor提供硬件虚拟化功能，模拟出一个操作系统的各种硬件状况，然后在这个虚拟的硬件上安装一个新的操作系统，也就是图上的Guest OS。
 而右侧就是容器技术，可以看到容器是使用了Docker Engine替代了Hypervisor，并且不需要创建Guest OS，而是直接就构造出了多套文件目录。
 那么容器技术到底是怎么实现的呢？
-通过Namespace让进程&amp;quot;隔离&amp;quot; Linux系统在使用clone()或者fork()函数创建一个进程时，可以给它指定很多参数，比如CLONE_NEWPID参数，就可以在进程创建起来后，让这个进程&amp;quot;看到&amp;quot;一个全新的进程空间：</description>
+二、通过Namespace让进程&amp;quot;隔离&amp;quot; Linux系统在使用clone()或者fork()函数创建一个进程时，可以给它指定很多参数，比如CLONE_NEWPID参数，就可以在进程创建起来后，让这个进程&amp;quot;看到&amp;quot;一个全新的进程空间：</description>
       
     </item>
     
     <item>
-      <title>InnoDB的非锁定一致性读</title>
+      <title>InnoDB引擎的非锁定一致性读</title>
       <link>https://yanghairui.life/post/innodb%E7%9A%84%E9%9D%9E%E9%94%81%E5%AE%9A%E4%B8%80%E8%87%B4%E6%80%A7%E8%AF%BB/</link>
       <pubDate>Mon, 07 Jun 2021 17:18:28 +0800</pubDate>
       
@@ -339,7 +339,7 @@ MVCC MVCC是一种概念，很多数据库都有自己的实现，而InnoDB的�
       
         <description>Redis的持久化 Redis 的读写都是在内存中，所以它的性能较高，但在内存中的数据会随着服务器的重启而丢失，为了保证数据不丢失，我们需要将内存中的数据存储到磁盘，以便 Redis 重启时能够从磁盘中恢复原有的数据，而整个过程就叫做 Redis 持久化。
 Redis的可持久化也是redis和memcached的主要区别之一，Memcached没有持久化机制。
-Redis持久化的方式 快照方式RDB RDB(Redis DataBase)，某一个时刻，将当前内存中存储的所有数据形成一个快照，并以二进制形式写入磁盘。</description>
+Redis持久化的方式 一、快照方式RDB RDB(Redis DataBase)，某一个时刻，将当前内存中存储的所有数据形成一个快照，并以二进制形式写入磁盘。</description>
       
     </item>
     
@@ -350,10 +350,10 @@ Redis持久化的方式 快照方式RDB RDB(Redis DataBase)，某一个时刻，
       
       <guid>https://yanghairui.life/post/docker%E5%BC%80%E5%90%AFtls%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/</guid>
       
-        <description>Docker远程连接 Docker是C/S架构，通过docker的客户端连接到docker daemon，然后由docker daemon在宿主机上执行构建镜像，运行容器等指令。
+        <description>一、Docker远程连接 Docker是C/S架构，通过docker的客户端连接到docker daemon，然后由docker daemon在宿主机上执行构建镜像，运行容器等指令。
 Docker支持多种方式将docker客户端连接到server。如果docker客户端和server都在同一台宿主机上，那么可以直接使用Unix域套接字文件/var/run/docker.sock连接，我们直接使用docker命令时实际上就是采用这种方式进行连接的。
 Docker也支持远程通过socket进行连接，可以选择开启或者不开启TLS，为了安全我们大多数时候还是采用开启TLS的方式进行远程连接。
-启动远程连接的过程 首先需要保证宿主机上docker daemon已安装，安装过程可查看官网
+二、启动远程连接的过程 首先需要保证宿主机上docker daemon已安装，安装过程可查看官网
 制作证书 首先需要制作证书，包括服务端证书，和客户端证书。</description>
       
     </item>
@@ -373,7 +373,7 @@ Informer的三个组成部分 Reflector 如上图，Reflector包含一个通过c
     </item>
     
     <item>
-      <title>redo log的两阶段提交</title>
+      <title>MySQL redo log的两阶段提交</title>
       <link>https://yanghairui.life/post/%E4%B8%A4%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4/</link>
       <pubDate>Sat, 08 May 2021 07:09:30 +0800</pubDate>
       
@@ -473,8 +473,8 @@ Server层包含了连接器、查询缓存、解析器、优化器、执行器(�
       
       <guid>https://yanghairui.life/post/%E5%AD%A6%E4%B9%A0%E7%BC%96%E5%86%99makefile/</guid>
       
-        <description>make工具介绍 项目构建往往要经过一系列的过程，尤其是C项目，可能需要先编译这个，再编译那个，再添加个链接，完了再打个docker镜像，会有很多的文件需要创建和更改。这些动作，我们既可以通过手工的方式，一步步完成，不免显得繁琐。或者也可以写个shell脚本自动完成。但是make是专门做这件事的。
-make的环境准备 对于linux或者mac系统，只要有gcc，一般都会有make，通过命令make -v可以检查你当前的环境有没有make，而在windows上想使用make还是比较复杂的，尽管网上有很多教程，但我都没有尝试成功，推荐还是尽量在linux或者mac环境下使用make构建你的项目
+        <description>make工具介绍 项目构建往往要经过一系列的过程，尤其是C项目，可能需要先编译这个，再编译那个，再添加个链接，完了再打个Docker镜像，会有很多的文件需要创建和更改。这些动作，我们既可以通过手工的方式，一步步完成，不免显得繁琐。或者也可以写个shell脚本自动完成。但是make是专门做这件事的。
+make的环境准备 对于linux或者mac系统，只要有gcc，一般都会有make，通过命令make -v可以检查你当前的环境有没有make，而在windows上想使用make还是比较复杂的，尽管网上有很多教程，但是我都没有尝试成功，推荐还是尽量在linux或者mac环境下使用make构建你的项目。
 make的使用 make的使用非常简单，笔者不是make大神，使用make都是通过一条 make 命令和编写一个Makefile文件即可。
 Makefile的编写 Makefile中需要指明要进行哪些操作，这些操作需要有哪些前置操作，或者需要哪些前置文件，最终又生成了什么文件。</description>
       

@@ -90,7 +90,7 @@
   
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Golang的map底层实现"/>
-<meta name="twitter:description" content="Map的底层数据结构 Golang的map数据类型底层使用的是哈希表实现，一个哈希表可以有多个哈希表节点，即bucket，一个bucket保存着map中的一个或者一组键值对。
+<meta name="twitter:description" content="一、Map的底层数据结构 Golang的map数据类型底层使用的是哈希表实现，一个哈希表可以有多个哈希表节点，即bucket，一个bucket保存着map中的一个或者一组键值对。
 hmap的数据结构： map的实现实际上就是runtime包里的hmap：
 // 定义在src/runtime/map.go中  type hmap struct{  count int // 当前保存的元素个数  ."/>
 
@@ -113,7 +113,7 @@ hmap的数据结构： map的实现实际上就是runtime包里的hmap：
         "alternativeHeadline": "",
         "description": "
       
-        Map的底层数据结构 Golang的map数据类型底层使用的是哈希表实现，一个哈希表可以有多个哈希表节点，即bucket，一个bucket保存着map中的一个或者一组键值对。\nhmap的数据结构： map的实现实际上就是runtime包里的hmap：\n\/\/ 定义在src\/runtime\/map.go中  type hmap struct{  count int \/\/ 当前保存的元素个数  .
+        一、Map的底层数据结构 Golang的map数据类型底层使用的是哈希表实现，一个哈希表可以有多个哈希表节点，即bucket，一个bucket保存着map中的一个或者一组键值对。\nhmap的数据结构： map的实现实际上就是runtime包里的hmap：\n\/\/ 定义在src\/runtime\/map.go中  type hmap struct{  count int \/\/ 当前保存的元素个数  .
 
 
       
@@ -283,8 +283,8 @@ hmap的数据结构： map的实现实际上就是runtime包里的hmap：
   <div class="sidebar__content">
     <div class="logo-title">
       <div class="title">
-        <img src="/images/profile5.jpg" alt="profile picture" />
-        <h3 title=""><a href="/">Harry Yang&#39;s Website</a></h3>
+        <img src="/images/profile-2023-06-23.jpg" alt="profile picture" />
+        <h3 title=""><a href="/">Harry&#39;s Website</a></h3>
         <div class="description">
           <p>Per aspera ad astra.<br />循此苦旅，终抵群星。<br /></p>
         </div>
@@ -306,20 +306,6 @@ hmap的数据结构： map的实现实际上就是runtime包里的hmap：
         </li>
 
       
-        <li>
-          <a href="https://www.zhihu.com/people/yang-hai-rui-88" rel="me" aria-label="zhihu" title="zhihu">
-            <i class="fab fa-zhihu fa-2x" aria-hidden="true"></i>
-          </a>
-        </li>
-
-      
-        <li>
-          <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=941811450@qq.com" rel="me" aria-label="e-mail" title="e-mail">
-            <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
-          </a>
-        </li>
-
-      
     </ul>
   </div><footer class="footer footer--sidebar">
   <div class="by_farbox">
@@ -327,7 +313,7 @@ hmap的数据结构： map的实现实际上就是runtime包里的hmap：
       <li class="footer__item">
         &copy;
         
-          2021-2022
+          2022-2023
 
         
       </li>
@@ -371,7 +357,7 @@ hmap的数据结构： map的实现实际上就是runtime包里的hmap：
           </div>
 
         
-      </div><h1 id="map的底层数据结构">Map的底层数据结构</h1>
+      </div><h1 id="一map的底层数据结构">一、Map的底层数据结构</h1>
 <p>Golang的map数据类型底层使用的是哈希表实现，一个哈希表可以有多个哈希表节点，即bucket，一个bucket保存着map中的一个或者一组键值对。</p>
 <h2 id="hmap的数据结构">hmap的数据结构：</h2>
 <p>map的实现实际上就是runtime包里的hmap：</p>
@@ -418,7 +404,7 @@ hmap的数据结构： map的实现实际上就是runtime包里的hmap：
     overflow uintptr
 }
 </code></pre><p>原理上和上述描述的都是一样的。</p>
-<h1 id="哈希冲突">哈希冲突</h1>
+<h1 id="二哈希冲突">二、哈希冲突</h1>
 <p>当有两个key经过哈希运算时低8位相同从而导致被分配到了同一个bucket上，这就说明出现了哈希冲突，而一个bucket可以存放8个key-value，所以会将高八位哈希值存在tophash字段上，然后把key-value存在data字段上。当8个位置都存满了，就会使用类似链表的方式把这个bucket链向一个新的bucket。overflow字段就是指向这个新bucket的字段(顾名思义，overflow就是溢出的意思)。</p>
 <p>就像下图这样：</p>
 <p><img src="/images/map/conflict.png" alt=""></p>
@@ -449,7 +435,7 @@ hmap的数据结构： map的实现实际上就是runtime包里的hmap：
 <h2 id="等量扩容">等量扩容</h2>
 <p>等量扩容指的是buckets数目不变，重新做一遍类似增量扩容的动作，把松散的键值对重新排列一次，让bucket的使用效率更高，保证更快速的存取。等量扩容解决的是某些场景下导致的键值都集中在一小部分bucket中，overflow的bucket过多，但是负载因子又不高的情况，即第二种触发扩容的条件。他会把比较满的bucket中的键值对转移到另一些比较空的键值对中。</p>
 <p><img src="/images/map/dilatation2.png" alt=""></p>
-<h1 id="map查找key的过程">Map查找key的过程</h1>
+<h1 id="三map查找key的过程">三、Map查找key的过程</h1>
 <ol>
 <li>根据key值算出哈希值；</li>
 <li>取哈希值低8位与hmap.B取模后确定落在buckets数组中的哪一个bucket上；</li>
@@ -459,7 +445,7 @@ hmap的数据结构： map的实现实际上就是runtime包里的hmap：
 <li>如果当前处于搬迁过程，则优先从oldbuckets数组中查找；</li>
 <li>如果查找不到，也不会返回空值，而是返回对应数据类型的0值(int就是0，string就是&quot;&quot;)。</li>
 </ol>
-<h1 id="map插入key的过程">Map插入key的过程</h1>
+<h1 id="四map插入key的过程">四、Map插入key的过程</h1>
 <ol>
 <li>根据key值算出哈希值；</li>
 <li>取哈希值低位与hmap.B取模确定bucket位置；</li>
@@ -501,7 +487,7 @@ hmap的数据结构： map的实现实际上就是runtime包里的hmap：
       <li class="footer__item">
         &copy;
         
-          2021-2022
+          2022-2023
 
         
       </li>

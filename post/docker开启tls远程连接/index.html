@@ -90,10 +90,10 @@
   
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Docker开启TLS远程连接"/>
-<meta name="twitter:description" content="Docker远程连接 Docker是C/S架构，通过docker的客户端连接到docker daemon，然后由docker daemon在宿主机上执行构建镜像，运行容器等指令。
+<meta name="twitter:description" content="一、Docker远程连接 Docker是C/S架构，通过docker的客户端连接到docker daemon，然后由docker daemon在宿主机上执行构建镜像，运行容器等指令。
 Docker支持多种方式将docker客户端连接到server。如果docker客户端和server都在同一台宿主机上，那么可以直接使用Unix域套接字文件/var/run/docker.sock连接，我们直接使用docker命令时实际上就是采用这种方式进行连接的。
 Docker也支持远程通过socket进行连接，可以选择开启或者不开启TLS，为了安全我们大多数时候还是采用开启TLS的方式进行远程连接。
-启动远程连接的过程 首先需要保证宿主机上docker daemon已安装，安装过程可查看官网
+二、启动远程连接的过程 首先需要保证宿主机上docker daemon已安装，安装过程可查看官网
 制作证书 首先需要制作证书，包括服务端证书，和客户端证书。"/>
 
 
@@ -115,7 +115,7 @@ Docker也支持远程通过socket进行连接，可以选择开启或者不开�
         "alternativeHeadline": "",
         "description": "
       
-        Docker远程连接 Docker是C\/S架构，通过docker的客户端连接到docker daemon，然后由docker daemon在宿主机上执行构建镜像，运行容器等指令。\nDocker支持多种方式将docker客户端连接到server。如果docker客户端和server都在同一台宿主机上，那么可以直接使用Unix域套接字文件\/var\/run\/docker.sock连接，我们直接使用docker命令时实际上就是采用这种方式进行连接的。\nDocker也支持远程通过socket进行连接，可以选择开启或者不开启TLS，为了安全我们大多数时候还是采用开启TLS的方式进行远程连接。\n启动远程连接的过程 首先需要保证宿主机上docker daemon已安装，安装过程可查看官网\n制作证书 首先需要制作证书，包括服务端证书，和客户端证书。
+        一、Docker远程连接 Docker是C\/S架构，通过docker的客户端连接到docker daemon，然后由docker daemon在宿主机上执行构建镜像，运行容器等指令。\nDocker支持多种方式将docker客户端连接到server。如果docker客户端和server都在同一台宿主机上，那么可以直接使用Unix域套接字文件\/var\/run\/docker.sock连接，我们直接使用docker命令时实际上就是采用这种方式进行连接的。\nDocker也支持远程通过socket进行连接，可以选择开启或者不开启TLS，为了安全我们大多数时候还是采用开启TLS的方式进行远程连接。\n二、启动远程连接的过程 首先需要保证宿主机上docker daemon已安装，安装过程可查看官网\n制作证书 首先需要制作证书，包括服务端证书，和客户端证书。
 
 
       
@@ -292,8 +292,8 @@ Docker也支持远程通过socket进行连接，可以选择开启或者不开�
   <div class="sidebar__content">
     <div class="logo-title">
       <div class="title">
-        <img src="/images/profile5.jpg" alt="profile picture" />
-        <h3 title=""><a href="/">Harry Yang&#39;s Website</a></h3>
+        <img src="/images/profile-2023-06-23.jpg" alt="profile picture" />
+        <h3 title=""><a href="/">Harry&#39;s Website</a></h3>
         <div class="description">
           <p>Per aspera ad astra.<br />循此苦旅，终抵群星。<br /></p>
         </div>
@@ -315,20 +315,6 @@ Docker也支持远程通过socket进行连接，可以选择开启或者不开�
         </li>
 
       
-        <li>
-          <a href="https://www.zhihu.com/people/yang-hai-rui-88" rel="me" aria-label="zhihu" title="zhihu">
-            <i class="fab fa-zhihu fa-2x" aria-hidden="true"></i>
-          </a>
-        </li>
-
-      
-        <li>
-          <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=941811450@qq.com" rel="me" aria-label="e-mail" title="e-mail">
-            <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
-          </a>
-        </li>
-
-      
     </ul>
   </div><footer class="footer footer--sidebar">
   <div class="by_farbox">
@@ -336,7 +322,7 @@ Docker也支持远程通过socket进行连接，可以选择开启或者不开�
       <li class="footer__item">
         &copy;
         
-          2021-2022
+          2022-2023
 
         
       </li>
@@ -380,11 +366,11 @@ Docker也支持远程通过socket进行连接，可以选择开启或者不开�
           </div>
 
         
-      </div><h2 id="docker远程连接">Docker远程连接</h2>
+      </div><h2 id="一docker远程连接">一、Docker远程连接</h2>
 <p>Docker是C/S架构，通过docker的客户端连接到docker daemon，然后由docker daemon在宿主机上执行构建镜像，运行容器等指令。</p>
 <p>Docker支持多种方式将docker客户端连接到server。如果docker客户端和server都在同一台宿主机上，那么可以直接使用Unix域套接字文件<code>/var/run/docker.sock</code>连接，我们直接使用docker命令时实际上就是采用这种方式进行连接的。</p>
 <p>Docker也支持远程通过socket进行连接，可以选择开启或者不开启TLS，为了安全我们大多数时候还是采用开启TLS的方式进行远程连接。</p>
-<h2 id="启动远程连接的过程">启动远程连接的过程</h2>
+<h2 id="二启动远程连接的过程">二、启动远程连接的过程</h2>
 <p>首先需要保证宿主机上docker daemon已安装，安装过程可查看<a href="https://docs.docker.com/engine/install/ubuntu/">官网</a></p>
 <h3 id="制作证书">制作证书</h3>
 <p>首先需要制作证书，包括服务端证书，和客户端证书。</p>
@@ -529,7 +515,7 @@ Docker也支持远程通过socket进行连接，可以选择开启或者不开�
       <li class="footer__item">
         &copy;
         
-          2021-2022
+          2022-2023
 
         
       </li>

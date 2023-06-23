@@ -90,7 +90,7 @@
   
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Golang中的defer、select和range的底层原理"/>
-<meta name="twitter:description" content="Defer defer语句用于延迟函数的调用，每次defer都会把一个函数压入栈中，当前函数返回前，再把延迟的函数取出来并执行，所以多个defer语句是后写的先执行的。
+<meta name="twitter:description" content="一、Defer defer语句用于延迟函数的调用，每次defer都会把一个函数压入栈中，当前函数返回前，再把延迟的函数取出来并执行，所以多个defer语句是后写的先执行的。
 几个题目 问题1：以下输出什么？ func deferFuncParameter() {  var aInt = 1   defer fmt."/>
 
 
@@ -112,7 +112,7 @@
         "alternativeHeadline": "",
         "description": "
       
-        Defer defer语句用于延迟函数的调用，每次defer都会把一个函数压入栈中，当前函数返回前，再把延迟的函数取出来并执行，所以多个defer语句是后写的先执行的。\n几个题目 问题1：以下输出什么？ func deferFuncParameter() {  var aInt = 1   defer fmt.
+        一、Defer defer语句用于延迟函数的调用，每次defer都会把一个函数压入栈中，当前函数返回前，再把延迟的函数取出来并执行，所以多个defer语句是后写的先执行的。\n几个题目 问题1：以下输出什么？ func deferFuncParameter() {  var aInt = 1   defer fmt.
 
 
       
@@ -282,8 +282,8 @@
   <div class="sidebar__content">
     <div class="logo-title">
       <div class="title">
-        <img src="/images/profile5.jpg" alt="profile picture" />
-        <h3 title=""><a href="/">Harry Yang&#39;s Website</a></h3>
+        <img src="/images/profile-2023-06-23.jpg" alt="profile picture" />
+        <h3 title=""><a href="/">Harry&#39;s Website</a></h3>
         <div class="description">
           <p>Per aspera ad astra.<br />循此苦旅，终抵群星。<br /></p>
         </div>
@@ -305,20 +305,6 @@
         </li>
 
       
-        <li>
-          <a href="https://www.zhihu.com/people/yang-hai-rui-88" rel="me" aria-label="zhihu" title="zhihu">
-            <i class="fab fa-zhihu fa-2x" aria-hidden="true"></i>
-          </a>
-        </li>
-
-      
-        <li>
-          <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=941811450@qq.com" rel="me" aria-label="e-mail" title="e-mail">
-            <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
-          </a>
-        </li>
-
-      
     </ul>
   </div><footer class="footer footer--sidebar">
   <div class="by_farbox">
@@ -326,7 +312,7 @@
       <li class="footer__item">
         &copy;
         
-          2021-2022
+          2022-2023
 
         
       </li>
@@ -370,7 +356,7 @@
           </div>
 
         
-      </div><h1 id="defer">Defer</h1>
+      </div><h1 id="一defer">一、Defer</h1>
 <p>defer语句用于延迟函数的调用，每次defer都会把一个函数压入栈中，当前函数返回前，再把延迟的函数取出来并执行，所以多个defer语句是<strong>后写的先执行</strong>的。</p>
 <h2 id="几个题目">几个题目</h2>
 <h3 id="问题1以下输出什么">问题1：以下输出什么？</h3>
@@ -473,7 +459,7 @@
 <li>deferproc()：在声明defer处调用，其将defer函数存入goroutine的链表中。</li>
 <li>deferreturn()：在return指令，准确讲是在ret指令前调用，将defer从goroutine链表中取出并执行。</li>
 </ul>
-<h1 id="select">Select</h1>
+<h1 id="二select">二、Select</h1>
 <p>select是golang语言层面提供的IO多路复用的机制，可以同时检测多个channel是否ready。</p>
 <h2 id="几个题目-1">几个题目</h2>
 <h3 id="题目1以下程序输出什么">题目1：以下程序输出什么</h3>
@@ -596,7 +582,7 @@
 <li>select语句中如果没有default语句，则会阻塞等待任意一个case。</li>
 <li>对于select语句中读操作，要判断是否成功读取，因为关闭的channel也可以读取，此时ok=false，可能会读到错误的信息。</li>
 </ul>
-<h1 id="range">Range</h1>
+<h1 id="三range">三、Range</h1>
 <p>range是一种迭代遍历手段，可操作的类型有数组，切片，Map，channel等。</p>
 <h2 id="几个题目-2">几个题目</h2>
 <h3 id="题目1切片遍历请问以下程序性能上有没有优化的空间">题目1：切片遍历，请问以下程序性能上有没有优化的空间？</h3>
@@ -682,7 +668,7 @@
       <li class="footer__item">
         &copy;
         
-          2021-2022
+          2022-2023
 
         
       </li>

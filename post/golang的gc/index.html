@@ -90,7 +90,7 @@
   
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Golang的垃圾回收机制"/>
-<meta name="twitter:description" content="GC 编程语言的内存管理方式就两种：自动和手动。像C/C&#43;&#43;、Rust这种极致追求性能的语言就是要程序员手动进行内存空间的使用和释放。而像Java、Go等语言就是使用自动的方式进行内存管理，通过内存分配器就行内存分配，通过垃圾收集器进行垃圾回收。
+<meta name="twitter:description" content="一、GC 编程语言的内存管理方式就两种：自动和手动。像C/C&#43;&#43;、Rust这种极致追求性能的语言就是要程序员手动进行内存空间的使用和释放。而像Java、Go等语言就是使用自动的方式进行内存管理，通过内存分配器就行内存分配，通过垃圾收集器进行垃圾回收。
 GC，全称 Garbage Collection，即垃圾回收，就是一种自动内存管理的机制。通过垃圾回收程序员可以专注于写程序，不用考虑内存的释放问题。
 常见的GC方式 主要包括两种：
   引用计数GC"/>
@@ -114,7 +114,7 @@ GC，全称 Garbage Collection，即垃圾回收，就是一种自动内存管�
         "alternativeHeadline": "",
         "description": "
       
-        GC 编程语言的内存管理方式就两种：自动和手动。像C\/C\u002b\u002b、Rust这种极致追求性能的语言就是要程序员手动进行内存空间的使用和释放。而像Java、Go等语言就是使用自动的方式进行内存管理，通过内存分配器就行内存分配，通过垃圾收集器进行垃圾回收。\nGC，全称 Garbage Collection，即垃圾回收，就是一种自动内存管理的机制。通过垃圾回收程序员可以专注于写程序，不用考虑内存的释放问题。\n常见的GC方式 主要包括两种：\n  引用计数GC
+        一、GC 编程语言的内存管理方式就两种：自动和手动。像C\/C\u002b\u002b、Rust这种极致追求性能的语言就是要程序员手动进行内存空间的使用和释放。而像Java、Go等语言就是使用自动的方式进行内存管理，通过内存分配器就行内存分配，通过垃圾收集器进行垃圾回收。\nGC，全称 Garbage Collection，即垃圾回收，就是一种自动内存管理的机制。通过垃圾回收程序员可以专注于写程序，不用考虑内存的释放问题。\n常见的GC方式 主要包括两种：\n  引用计数GC
 
 
       
@@ -305,8 +305,8 @@ GC，全称 Garbage Collection，即垃圾回收，就是一种自动内存管�
   <div class="sidebar__content">
     <div class="logo-title">
       <div class="title">
-        <img src="/images/profile5.jpg" alt="profile picture" />
-        <h3 title=""><a href="/">Harry Yang&#39;s Website</a></h3>
+        <img src="/images/profile-2023-06-23.jpg" alt="profile picture" />
+        <h3 title=""><a href="/">Harry&#39;s Website</a></h3>
         <div class="description">
           <p>Per aspera ad astra.<br />循此苦旅，终抵群星。<br /></p>
         </div>
@@ -328,20 +328,6 @@ GC，全称 Garbage Collection，即垃圾回收，就是一种自动内存管�
         </li>
 
       
-        <li>
-          <a href="https://www.zhihu.com/people/yang-hai-rui-88" rel="me" aria-label="zhihu" title="zhihu">
-            <i class="fab fa-zhihu fa-2x" aria-hidden="true"></i>
-          </a>
-        </li>
-
-      
-        <li>
-          <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=941811450@qq.com" rel="me" aria-label="e-mail" title="e-mail">
-            <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
-          </a>
-        </li>
-
-      
     </ul>
   </div><footer class="footer footer--sidebar">
   <div class="by_farbox">
@@ -349,7 +335,7 @@ GC，全称 Garbage Collection，即垃圾回收，就是一种自动内存管�
       <li class="footer__item">
         &copy;
         
-          2021-2022
+          2022-2023
 
         
       </li>
@@ -393,7 +379,7 @@ GC，全称 Garbage Collection，即垃圾回收，就是一种自动内存管�
           </div>
 
         
-      </div><h1 id="gc">GC</h1>
+      </div><h1 id="一gc">一、GC</h1>
 <p>编程语言的内存管理方式就两种：自动和手动。像C/C++、Rust这种极致追求性能的语言就是要程序员手动进行内存空间的使用和释放。而像Java、Go等语言就是使用自动的方式进行内存管理，通过内存分配器就行内存分配，通过垃圾收集器进行垃圾回收。</p>
 <p><code>GC</code>，全称 <code>Garbage Collection</code>，即垃圾回收，就是一种自动内存管理的机制。通过垃圾回收程序员可以专注于写程序，不用考虑内存的释放问题。</p>
 <h2 id="常见的gc方式">常见的GC方式</h2>
@@ -418,7 +404,7 @@ GC，全称 Garbage Collection，即垃圾回收，就是一种自动内存管�
 <li>寄存器：寄存器的值可能表示一个指针，参与计算的这些指针可能指向某些赋值器分配的堆内存区块。</li>
 </ul>
 <p>根对象都是 mutator 不需要其他对象就可以直接访问到的对象，并且通过根对象可以追踪到其他所有存活的对象</p>
-<h1 id="go的gc实现">Go的GC实现</h1>
+<h1 id="二golang的gc实现">二、Golang的GC实现</h1>
 <h2 id="三色标记法">三色标记法</h2>
 <p>Go的GC经过了多个版本，不断优化，从1.5版本开始使用三色标记法才算稳定。</p>
 <p><strong>三色标记法</strong>，属于追踪式GC。整个过程分为两个阶段：标记(Mark)和清除(Sweep)，所以也叫做Mark-Sweep垃圾回收算法。</p>
@@ -518,7 +504,7 @@ GC，全称 Garbage Collection，即垃圾回收，就是一种自动内存管�
       <li class="footer__item">
         &copy;
         
-          2021-2022
+          2022-2023
 
         
       </li>
