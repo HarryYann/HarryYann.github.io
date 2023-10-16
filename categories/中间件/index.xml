@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>kafka on Website of Harry Yang</title>
-    <link>https://yanghairui.life/tags/kafka/</link>
-    <description>Recent content in kafka on Website of Harry Yang</description>
+    <title>中间件 on Website of Harry Yang</title>
+    <link>https://yanghairui.life/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/</link>
+    <description>Recent content in 中间件 on Website of Harry Yang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 23 Jun 2023 23:57:32 +0800</lastBuildDate><atom:link href="https://yanghairui.life/tags/kafka/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 23 Jun 2023 23:57:32 +0800</lastBuildDate><atom:link href="https://yanghairui.life/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Kafka Controller模块源码阅读</title>
       <link>https://yanghairui.life/post/kafka_controller_source_read/</link>
